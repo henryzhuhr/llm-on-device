@@ -3,12 +3,35 @@ name = "llm-on-device"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.10, <3.13"
-dependencies = []
+requires-python = ">=3.11, <3.13"
+dependencies = [
+    "huggingface-hub[cli]>=0.34.3",
+    "loguru>=0.7.3",
+    "transformers[torch]>=4.54.1",
+]
+
+[project.optional-dependencies]
+tensorrt = [
+    # "tensorrt-cu12",
+    # # "tensorrt-cu12-libs", # ref: https://github.com/astral-sh/uv/issues/9763
+    # "tensorrt-cu12-bindings", # ref: https://github.com/astral-sh/uv/issues/9763
+    # "tensorrt-llm",
+    # "flashinfer-python"
+]
+
+[tool.uv.sources]
+# tensorrt = { index = "nvidia" }
+tensorrt-llm = { index = "nvidia" }
+# tensorrt-cu12-libs = { index = "nvidia" }
+# tensorrt-cu12-bindings = { index = "nvidia" }
+
+[[tool.uv.index]]
+url = "https://mirrors.cloud.tencent.com/pypi/simple/"
+default = true
 
 [[tool.uv.index]]
 url = "https://mirrors.ustc.edu.cn/pypi/simple"
 
 [[tool.uv.index]]
-url = "https://mirrors.cloud.tencent.com/pypi/simple/"
-default = true
+name = "nvidia"
+url = "https://pypi.nvidia.com/"
